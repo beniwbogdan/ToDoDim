@@ -6,7 +6,7 @@ type Task={
     spanTitle:string
 }
 
-type Tasks ={
+export type Tasks ={
     title:string,
     isDone:Array<Task>
 }
