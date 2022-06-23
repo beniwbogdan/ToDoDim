@@ -1,16 +1,16 @@
 import React from 'react';
 
-type Task={
-    id:number,
-    checked:boolean,
-    spanTitle:string
+type Task = {
+    id: number,
+    checked: boolean,
+    spanTitle: string
 }
 
-export type Tasks ={
-    title:string,
-    isDone:Array<Task>
+export type Tasks = {
+    title: string,
+    isDone: Array<Task>
 }
-const ToDoList = (props:Tasks) => {
+const ToDoList = (props: Tasks) => {
     return (
         <div>
             <h3>{props.title}</h3>
@@ -18,11 +18,24 @@ const ToDoList = (props:Tasks) => {
                 <input/>
                 <button>+</button>
             </div>
+
             <ul>
-                <li><input type="checkbox" checked={props.isDone[0].checked}/><span>{props.isDone[0].spanTitle}</span></li>
-                <li><input type="checkbox" checked={props.isDone[1].checked}/><span>{props.isDone[1].spanTitle}</span></li>
-                <li><input type="checkbox" checked={props.isDone[2].checked}/><span>{props.isDone[2].spanTitle}</span></li>
+                {
+                    props.isDone.map(w => {
+                        return <li><input type="checkbox"
+                                          checked={w.checked}/><span>{w.spanTitle}</span>
+                        </li>
+
+                    })
+                }
+
+
             </ul>
+            <div className="buttons">
+                <button>All</button>
+                <button>Active</button>
+                <button>Completed</button>
+            </div>
         </div>
     );
 }

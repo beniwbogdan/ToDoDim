@@ -11,6 +11,11 @@
    flex-direction: column;
     align-items: baseline;
 }
+.App .buttons{
+    display: flex;
+    justify-content: space-between;
+
+}
 
 
 
