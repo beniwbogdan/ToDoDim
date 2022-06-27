@@ -23,7 +23,7 @@ const ToDoList = (props: Tasks) => {
                 {
                     props.isDone.map(w => {
                         return <li><input type="checkbox"
-                                          checked={w.checked}/><span>{w.spanTitle}</span>
+                                          checked={w.checked}/><span>{w.spanTitle}</span><button>X</button>
                         </li>
 
                     })
