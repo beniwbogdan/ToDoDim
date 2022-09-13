@@ -1,46 +1,46 @@
 import React from 'react';
 
-type Task = {
+export type Task = {
     id: number,
     checked: boolean,
     spanTitle: string
 }
 
-export type Tasks = {
+export type ToDoListPropsType = {
     title: string,
-    isDone: Array<Task>,
-    removeTask:Function
+    tasks: Array<Task>,
+    removeTask: Function
 }
-const ToDoList = (props: Tasks) => {
+const ToDoList = (props: ToDoListPropsType) => {
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
+                <input />
                 <button>+</button>
             </div>
 
             <ul>
                 {
-                    props.isDone.map(w => {
-                        return <li><input type="checkbox"
-                                          checked={w.checked}/><span>{w.spanTitle}</span>
-                            <button onClick={()=>{
-                                props.removeTask(w.id);
-                                console.log(w.id)}}>X</button>
-                        </li>
-
+                    props.tasks.map(w => {
+                        return (
+                            <li>
+                                <input type="checkbox" checked={w.checked} />
+                                <span>{w.spanTitle}</span>
+                                <button onClick={() => { props.removeTask(w.id) }}>X</button>
+                            </li>
+                        );
                     })
+
                 }
-
-
             </ul>
             <div className="buttons">
                 <button>All</button>
                 <button>Active</button>
                 <button>Completed</button>
             </div>
-        </div>
+        </div >
     );
 }
 
