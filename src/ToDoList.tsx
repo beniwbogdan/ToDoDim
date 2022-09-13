@@ -8,7 +8,8 @@ type Task = {
 
 export type Tasks = {
     title: string,
-    isDone: Array<Task>
+    isDone: Array<Task>,
+    removeTask:Function
 }
 const ToDoList = (props: Tasks) => {
     return (
@@ -23,7 +24,10 @@ const ToDoList = (props: Tasks) => {
                 {
                     props.isDone.map(w => {
                         return <li><input type="checkbox"
-                                          checked={w.checked}/><span>{w.spanTitle}</span><button>X</button>
+                                          checked={w.checked}/><span>{w.spanTitle}</span>
+                            <button onClick={()=>{
+                                props.removeTask(w.id);
+                                console.log(w.id)}}>X</button>
                         </li>
 
                     })

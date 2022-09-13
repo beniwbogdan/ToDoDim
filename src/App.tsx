@@ -1,27 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import ToDoList,{Tasks} from "./ToDoList";
+import ToDoList, {Tasks} from "./ToDoList";
 
 function App() {
-    const title_1= "Title 1";
-    const title_2= "Title 2";
+    const title_1 = "Title 1";
+    const title_2 = "Title 2";
 
-    const task_1=[
-        {id:1, checked:true,spanTitle:"React"},
-        {id:2, checked:true,spanTitle:"Redux"},
-        {id:3, checked:false,spanTitle:"MobX"},
+    let initTasks = [
+        {id: 1, checked: true, spanTitle: "React"},
+        {id: 2, checked: true, spanTitle: "Redux"},
+        {id: 3, checked: false, spanTitle: "MobX"},
     ]
-    const task_2=[
-        {id:1, checked:true,spanTitle:"Vanilla JS"},
-        {id:2, checked:false,spanTitle:"Vue.js"},
-        {id:3, checked:false,spanTitle:"Angular"},
-    ]
-  return (
-   <div className="App">
-     <ToDoList title={title_1} isDone={task_1}/>
-     <ToDoList title={title_2} isDone={task_2}/>
-   </div>
-  );
+debugger
+    //  const [task_1,removeTask]=useState(true);
+    let arr = useState(initTasks);
+    let tasks = arr[0];
+    let setTasks = arr[1];
+
+    const removeTask = (id: number) => {
+        let filteredTask = tasks.filter(w => w.id !== id)
+        setTasks(filteredTask);
+    }
+    return (
+        <div className="App">
+            <ToDoList removeTask={removeTask} title={title_1} isDone={tasks}/>
+
+        </div>
+    );
 }
 
 export default App;
