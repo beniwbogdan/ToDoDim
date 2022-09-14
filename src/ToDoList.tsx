@@ -1,4 +1,5 @@
-import React from 'react';
+import { debug } from 'console';
+import React, { useState } from 'react';
 
 export type Task = {
     id: string,
@@ -15,14 +16,25 @@ export type ToDoListPropsType = {
     addTask: Function
 
 }
-const ToDoList = (props: ToDoListPropsType) => {
 
+//const [check, setCheck]=useState(false);
+
+const ToDoList = (props: ToDoListPropsType) => {
+    const [newTaskTitle, setNewTaskTitle] = useState("");
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input type="text" className="form-control" placeholder="Enter..." />
-                <button onClick={() => props.addTask()}>+</button>
+                <input
+                    type="text"
+                    value={newTaskTitle}
+                    onChange={(e) => {
+                        setNewTaskTitle(e.target.value);
+
+                    }}
+                    placeholder="Enter..." />
+                <button
+                    onClick={() => props.addTask(newTaskTitle)}>+</button>
             </div>
 
             <ul>
@@ -31,7 +43,7 @@ const ToDoList = (props: ToDoListPropsType) => {
 
                         return (
                             <li key={w.id}>
-                                <input type="checkbox" checked={w.isDone} onChange={() => { }} />
+                                <input type="checkbox" checked={w.isDone} onChange={(e) => { return w.isDone = !e.target.value; }} />
                                 <span>{w.spanTitle}</span>
                                 <button onClick={() => { props.removeTask(w.id) }}>X</button>
                             </li>

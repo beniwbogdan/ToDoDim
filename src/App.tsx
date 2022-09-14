@@ -26,8 +26,8 @@ function App() {
         setTasks(filteredTasks);
     }
 
-    const addTask = () => {
-        let newTask = { id: v1(), isDone: false, spanTitle: "new task", }
+    const addTask = (newTaskTitle: any) => {
+        let newTask = { id: v1(), isDone: false, spanTitle: newTaskTitle, }
         let newTasks = [newTask, ...tasks];
         setTasks(newTasks);
 
