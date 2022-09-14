@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type Task = {
-    id: number,
+    id: string,
     isDone: boolean,
     spanTitle: string,
 
@@ -11,7 +11,8 @@ export type ToDoListPropsType = {
     title: string,
     tasks: Array<Task>,
     removeTask: Function,
-    changeFilter: Function
+    changeFilter: Function,
+    addTask: Function
 
 }
 const ToDoList = (props: ToDoListPropsType) => {
@@ -20,16 +21,17 @@ const ToDoList = (props: ToDoListPropsType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input />
-                <button>+</button>
+                <input type="text" className="form-control" placeholder="Enter..." />
+                <button onClick={() => props.addTask()}>+</button>
             </div>
 
             <ul>
                 {
                     props.tasks.map(w => {
+
                         return (
-                            <li>
-                                <input type="checkbox" checked={w.isDone} />
+                            <li key={w.id}>
+                                <input type="checkbox" checked={w.isDone} onChange={() => { }} />
                                 <span>{w.spanTitle}</span>
                                 <button onClick={() => { props.removeTask(w.id) }}>X</button>
                             </li>
