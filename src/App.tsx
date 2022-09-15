@@ -6,11 +6,11 @@ import { Task } from "./ToDoList";
 import v1 from "react-uuid"
 
 export type FilterValuesType = "all" | "completed" | "active";
-const title_1 = "Title 1";
-
-
-
-
+type ToDoListType = {
+    id: string,
+    title: string,
+    filter: FilterValuesType
+}
 
 function App() {
     let [tasks, setTasks] = useState<Array<Task>>([
@@ -54,17 +54,26 @@ function App() {
         setTasks([...tasks]);
 
     }
+    let todolist: Array<ToDoListType> = [
+        { id: v1(), title: "task 1", filter: "active" },
+        { id: v1(), title: "task 2", filter: "completed" },
+    ]
     return (
         <div className="App">
-            <ToDoList
-                removeTask={removeTask}
-                tasks={tasksForToDoList}
-                title={title_1}
-                changeFilter={changeFilter}
-                addTask={addTask}
-                changeTaskStatus={changeStatus}
-                filter={filter}
-            />
+
+            {todolist.map(tl => {
+                return <ToDoList
+                    removeTask={removeTask}
+                    tasks={tasksForToDoList}
+                    title={tl.title}
+                    changeFilter={changeFilter}
+                    addTask={addTask}
+                    changeTaskStatus={changeStatus}
+                    filter={tl.filter}
+                />
+            })}
+
+
 
         </div>
     );
