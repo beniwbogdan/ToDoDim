@@ -74,10 +74,11 @@ const ToDoList = (props: ToDoListPropsType) => {
                         return (
                             <li key={w.id}>
                                 <input
+
                                     type="checkbox"
                                     checked={w.isDone}
                                     onChange={onChangeHandler} />
-                                <span>{w.spanTitle}</span>
+                                <span className={w.isDone ? "is-done" : ""}>{w.spanTitle}</span>
                                 <button onClick={onClickHandler}>X</button>
                             </li>
                         );
