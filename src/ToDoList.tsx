@@ -20,19 +20,25 @@ export type ToDoListPropsType = {
 }
 
 const ToDoList = (props: ToDoListPropsType) => {
-    const [newTaskTitle, setNewTaskTitle] = useState("");
-
-
+    const [title, setTitle] = useState("");
+    const addTask = () => {
+        if (title.trim() === "") {
+            return;
+        } else {
+            props.addTask(title);
+            setTitle("");
+        }
+    }
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.target.value);
+        setTitle(e.target.value);
     }
     const onKeyPressHundler = (e: KeyboardEvent<HTMLInputElement>) => {
         if ((e.ctrlKey && e.charCode) || (e.charCode) === 13) {
-            if (newTaskTitle.length <= 0) {
+            if (title.trim() === "") {
                 alert("Enter more then 0 symbols")
             } else {
-                props.addTask(newTaskTitle);
-                setNewTaskTitle("");
+                props.addTask(title);
+                setTitle("");
             }
 
         } else { return true }
@@ -46,7 +52,7 @@ const ToDoList = (props: ToDoListPropsType) => {
             <div>
                 <input
                     type="text"
-                    value={newTaskTitle}
+                    value={title}
                     onChange={onNewTitleChangeHandler}
                     onKeyPress={onKeyPressHundler}
                     placeholder="Enter..."
@@ -54,8 +60,7 @@ const ToDoList = (props: ToDoListPropsType) => {
 
                 <button
                     onClick={() => {
-                        props.addTask(newTaskTitle);
-                        setNewTaskTitle("");
+                        addTask();
                     }}>+
                 </button>
             </div>
