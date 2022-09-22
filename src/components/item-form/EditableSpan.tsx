@@ -1,4 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
+import Input from '@mui/material/Input';
+
 type EditableSpanType = {
     title: string,
     editMode: boolean,
@@ -24,7 +26,7 @@ function EditableSpan(props: EditableSpanType) {
         <div>
             {
                 editMode
-                    ? <input
+                    ? <Input
                         onBlur={activateViewMode}
                         onChange={onChangeTitleHandler}
                         autoFocus type="text"

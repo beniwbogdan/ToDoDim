@@ -5,6 +5,9 @@ import ToDoList from "./ToDoList";
 import v1 from "react-uuid"
 import ItemForm from './components/item-form/ItemForm';
 import { Task } from './ToDoList';
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { Menu } from '@mui/icons-material';
+
 export type FilterValuesType = "all" | "completed" | "active";
 type ToDoListType = {
     id: string,
@@ -96,6 +99,17 @@ function App() {
     }
     return (
         <div className="App">
+            <AppBar position='static'>
+                <Toolbar>
+                    <IconButton edge="start" color='inherit' aria-label="menu">
+                        <Menu />
+                    </IconButton>
+                    <Typography variant='h4'>
+                        News
+                    </Typography>
+                    <Button color={"inherit"}>Login</Button>
+                </Toolbar>
+            </AppBar>
             <ItemForm addItem={addToDoList} />
             {
                 todolists.map(tl => {

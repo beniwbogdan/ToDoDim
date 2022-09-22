@@ -3,6 +3,18 @@
 .listOfTasksUnits{
 display: flex;
 flex-direction: row;
-width: 100%;
+min-width: 300px;
 justify-content: space-between;
+border-left: 1px solid;
+border-right: 1px solid ;
+margin-bottom: 5px;
+}
+.allToDoList{
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
 }

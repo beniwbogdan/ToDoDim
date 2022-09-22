@@ -1,4 +1,6 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import { IconButton, TextField } from '@mui/material';
 export type AddItemFormPropsType = {
     addItem: (title: string) => void,
 }
@@ -31,22 +33,19 @@ function ItemForm(props: AddItemFormPropsType) {
 
 
         <div>
-            <input
+            <TextField
                 type="text"
+                variant="standard"
                 value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHundler}
-                placeholder="Enter..."
-                className={error ? "error" : ""}
+                label="Enter..."
+                error={!!error}
+                helperText={error}
             />
-
-            <button onClick={addTask}>+</button>
-
-            <div>
-                {
-                    error && <div className="error-message">{error}</div>
-                }
-            </div>
+            <IconButton onClick={addTask} color="success">
+                <PlaylistAddIcon />
+            </IconButton>
         </div>
     )
 }

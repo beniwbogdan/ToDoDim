@@ -4,6 +4,12 @@ import React, { ChangeEvent } from 'react';
 import ItemForm from './components/item-form/ItemForm';
 import EditableSpan from './components/item-form/EditableSpan';
 import styles from "./ToDoList.module.css"
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Delete } from '@mui/icons-material';
+
 export type Task = {
     id: string,
     isDone: boolean,
@@ -43,9 +49,12 @@ const ToDoList = (props: ToDoListPropsType) => {
         props.addTask(title, props.id);
     }
     return (
-        <div>
+        <div className={styles.allToDoList}>
             <h3><EditableSpan title={props.title} editMode={false} onChange={changeToDoListTitle} />
-                <button onClick={() => deleteTask()}>X</button></h3>
+                <Button endIcon={<DeleteIcon />} onClick={() => deleteTask()} variant="outlined" >
+                    DELETE TASK
+                </Button>
+                {/* <button >X</button> */}</h3>
             <div>
                 <ItemForm addItem={addTask} />
 
@@ -61,20 +70,32 @@ const ToDoList = (props: ToDoListPropsType) => {
                         const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => { props.changeTaskStatus(w.id, e.currentTarget.checked, props.id) }
                         return (
                             <li key={w.id} className={styles.listOfTasksUnits}>
-                                <input
-                                    type="checkbox"
+                                <Checkbox
+                                    // type="checkbox"
                                     checked={w.isDone}
                                     onChange={onChangeStatusHandler} />
                                 <EditableSpan title={w.spanTitle} editMode={false} onChange={onChangeTitleHandler} />
-                                <button onClick={onClickHandler}>X</button>
+                                <Button onClick={onClickHandler}  >
+                                    <Delete />
+                                </Button>
+                                {/* <button onClick={onClickHandler}>X</button> */}
                             </li>
                         );
                     })
 
                 }
             </ul>
-            <div className="buttons">
-                <button
+            <div className={styles.buttons}>
+                <ButtonGroup aria-label="outlined primary button group">
+                    <Button variant={props.filter === "all" ? "contained" : "text"}
+                        onClick={onAllClickHandler}>All</Button>
+                    <Button color='success' variant={props.filter === "active" ? "contained" : "text"}
+                        onClick={onActiveClickHandler}>Active</Button>
+                    <Button color='error' variant={props.filter === "completed" ? "contained" : "text"}
+                        onClick={onCompletedClickHandler}>Completed</Button>
+                </ButtonGroup>
+
+                {/* <button
                     className={props.filter === "all" ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All</button>
                 <button
@@ -82,7 +103,7 @@ const ToDoList = (props: ToDoListPropsType) => {
                     onClick={onActiveClickHandler}>Active</button>
                 <button
                     className={props.filter === "completed" ? "active-filter" : ""}
-                    onClick={onCompletedClickHandler}>Completed</button>
+                    onClick={onCompletedClickHandler}>Completed</button> */}
             </div>
         </div >
     );
