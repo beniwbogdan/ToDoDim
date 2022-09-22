@@ -7,8 +7,9 @@ import styles from "./ToDoList.module.css"
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Delete } from '@mui/icons-material';
+import { Grid } from '@mui/material';
 
 export type Task = {
     id: string,
@@ -51,17 +52,15 @@ const ToDoList = (props: ToDoListPropsType) => {
     return (
         <div className={styles.allToDoList}>
             <h3><EditableSpan title={props.title} editMode={false} onChange={changeToDoListTitle} />
-                <Button endIcon={<DeleteIcon />} onClick={() => deleteTask()} variant="outlined" >
+                <Button color='error' endIcon={<DeleteForeverIcon />} onClick={() => deleteTask()} variant="outlined" >
                     DELETE TASK
                 </Button>
                 {/* <button >X</button> */}</h3>
             <div>
-                <ItemForm addItem={addTask} />
-
-
+                <Grid style={{ padding: "10px" }}><ItemForm addItem={addTask} /></Grid>
             </div>
 
-            <ul className={styles.allList}>
+            <div className={styles.allList}>
                 {
                     props.tasks.map(w => {
                         const onClickHandler = () => { props.removeTask(w.id, props.id) }
@@ -69,7 +68,7 @@ const ToDoList = (props: ToDoListPropsType) => {
 
                         const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => { props.changeTaskStatus(w.id, e.currentTarget.checked, props.id) }
                         return (
-                            <li key={w.id} className={styles.listOfTasksUnits}>
+                            <div key={w.id} className={styles.listOfTasksUnits}>
                                 <Checkbox
                                     // type="checkbox"
                                     checked={w.isDone}
@@ -79,22 +78,23 @@ const ToDoList = (props: ToDoListPropsType) => {
                                     <Delete />
                                 </Button>
                                 {/* <button onClick={onClickHandler}>X</button> */}
-                            </li>
+                            </div>
                         );
                     })
 
                 }
-            </ul>
+            </div>
             <div className={styles.buttons}>
-                <ButtonGroup aria-label="outlined primary button group">
-                    <Button variant={props.filter === "all" ? "contained" : "text"}
-                        onClick={onAllClickHandler}>All</Button>
-                    <Button color='success' variant={props.filter === "active" ? "contained" : "text"}
-                        onClick={onActiveClickHandler}>Active</Button>
-                    <Button color='error' variant={props.filter === "completed" ? "contained" : "text"}
-                        onClick={onCompletedClickHandler}>Completed</Button>
-                </ButtonGroup>
-
+                <Grid style={{ padding: "10px" }}>
+                    <ButtonGroup aria-label="outlined primary button group">
+                        <Button variant={props.filter === "all" ? "contained" : "text"}
+                            onClick={onAllClickHandler}>All</Button>
+                        <Button color='success' variant={props.filter === "active" ? "contained" : "text"}
+                            onClick={onActiveClickHandler}>Active</Button>
+                        <Button color='error' variant={props.filter === "completed" ? "contained" : "text"}
+                            onClick={onCompletedClickHandler}>Completed</Button>
+                    </ButtonGroup>
+                </Grid>
                 {/* <button
                     className={props.filter === "all" ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All</button>

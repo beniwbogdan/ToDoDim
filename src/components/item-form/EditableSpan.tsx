@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
 import Input from '@mui/material/Input';
+import { Grid } from '@mui/material';
 
 type EditableSpanType = {
     title: string,
@@ -24,17 +25,19 @@ function EditableSpan(props: EditableSpanType) {
 
     return (
         <div>
-            {
-                editMode
-                    ? <Input
-                        onBlur={activateViewMode}
-                        onChange={onChangeTitleHandler}
-                        autoFocus type="text"
-                        value={title} />
-                    : <span
-                        onDoubleClick={activateEditMode}
-                    >{props.title}</span>
-            }
+            <Grid>
+                {
+                    editMode
+                        ? <Grid> <Input
+                            onBlur={activateViewMode}
+                            onChange={onChangeTitleHandler}
+                            autoFocus type="text"
+                            value={title} /></Grid>
+                        : <Grid style={{ marginTop: "8px" }}><span
+                            onDoubleClick={activateEditMode}
+                        >{props.title}</span></Grid>
+                }
+            </Grid>
         </div>
 
 
